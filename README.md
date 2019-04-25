@@ -13,6 +13,7 @@ Currently focusing on [STM32F769DISCO](https://www.st.com/en/evaluation-tools/32
 
 `libs` folder contains python modules that makes it more convenient to work with optimized C libraries described above:
 - `libs/bitcoin` defines classes useful for Bitcoin. `PrivateKey` and `PublicKey` classes support scalar and point arithmetics - they implement `__mul__`, `__add__` and other operator overrides that are possible for corresponding classes.
+- `libs/hmac.py` and `libs/pbkdf2.py` do what their names say they do ;)
 
 ## Compiling
 
