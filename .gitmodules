@@ -1,0 +1,9 @@
+[submodule "micropython"]
+	path = micropython
+	url = https://github.com/stepansnigirev/micropython
+[submodule "usermods/mpy-bitcoin"]
+	path = usermods/mpy-bitcoin
+	url = https://github.com/stepansnigirev/mpy-bitcoin.git
+[submodule "usermods/mpy-display-f769"]
+	path = usermods/mpy-display-f769
+	url = https://github.com/stepansnigirev/mpy-display-f769.git
