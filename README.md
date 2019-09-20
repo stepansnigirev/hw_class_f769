@@ -41,19 +41,6 @@ Then copy `upy-f769disco.bin` to the board. When you connect the board with the 
 
 When micropython is on the board copy content of the `lib` folder to the `PYBFLASH` drive - now you have access to all the libraries and can work on your hardware wallet.
 
-# Roadmap:
-
-- [x] `hashlib` module with `sha1`, `ripemd160`, `sha256` and `sha512` functions (C module)
-- [x] `hmac` module (python)
-- [x] `pbkdf2` module (python)
-- [x] `_ecc` elliptic curve arithmetic (C module)
-- [x] `ecc` elliptic curve library (with `__mul__` and `__add__`)
-- [x] minimal `display` library
-- [ ] littlevgl GUI library
-- [ ] dynamic SD card (mount / unmount)
-- [ ] hardware crypto accelerators support
-- [ ] optimize `hmac`, `pbkdf2` with C modules
-
 # API
 
 ## `display` library
@@ -63,29 +50,10 @@ Works on ly on STM32F769DISCO right now, and only a few functions are currently 
 - `print(msg, x, y)` - prints the `msg` string at coordinates `(x,y)`. Doesn't support `\n`.
 - `clear()` - clears the screen.
 
-## `bitcoin` library
+## hashlib module
 
-Pure micropython bitcoin library adapted from Jimmy's [pybtcfork](https://github.com/jimmysong/pybtcfork) library. For elliptic curves it uses `_ecc` module (see below).
+It has all necessary hash functions - rmd160, sha256, sha512. It also includes one-line functions for pbkdf2-hmac-sha512 required by bip39 and hmac-sha512 required by bip32.
 
-Currently ported `PrivateKey` and `PublicKey` classes. These classes implement `__add__`, `__mul__` and `__truediv__` methods, so normal elliptic curve arithmetics works with them. This means you can do scalar addition, multiplication and division as well as point addition and multiplication by a scalar.
+## secp256k1 module
 
-Simple example:
-
-```py
-from bitcoin import *
-pk = PrivateKey.parse("L4je5ce4nCaAfXD96PQzgcf7dFYDDghwQqULwLWyxjdo9KBxLFGK")
-pub = pk.public_key
-print(pub.address())
-```
-
-## `_ecc` C module
-
-Minimal C module that provides a point ariphmetics functions. Can be used for efficient point addition and multiplication by a scalar.
-
-Available functions:
-
-- `get_public_key33(privkey)` - takes a 32-byte array with private key in big endian and returns 33-byte array with compressed sec of the public key.
-- `get_public_key65(privkey)` - takes a 32-byte array with private key in big endian and returns 65-byte array with uncompressed sec of the public key.
-- `point_add(p1, p2)` - takes byte arrays with sec of two points and returns a 65-byte array with sec of the sum.
-- `point_multiply(scalar, point)` - takes a 32-byte array with a scalar and byte array with sec of the point and returns 65-byte array with sec of the product
-- `validate_pubkey(point)` - takes a byte array with sec of the point and checks if it is on the curve or not.
+Binding to the secp256k1 c library. Global context is used. Otherwise API is exactly the same as in secp256k1.h file.
