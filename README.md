@@ -6,14 +6,16 @@ Currently focusing on [STM32F769DISCO](https://www.st.com/en/evaluation-tools/32
 
 `micropython` folder contains a fork of [micropython](http://micropython.org) with some temporary workarounds for stm32f769 board. Currently the master branch of micropython fails to build for this target, as soon as it is fixed we will switch to the main micropython repo.
 
-`usermods/bitcoin` folder contains minimal C-modules for micropython with basic crypto algorithms. Interface to optimized C modules allow to use optimized elliptic curve arithmetics and hashing functions:
-- `usermods/bitcoin/hashlib.c` adds support of sha1, sha256, sha512 and ripemd160 required for Bitcoin to `hashlib` python module.
-- `usermods/bitcoin/ecc.c` adds a few optimized elliptic curve operations (exposed to micropython as `_ecc` module).
-- `usermods/display/` folder contains a C-module to work with the display present on the board.
+`usermods/mpy-bitcoin` folder contains minimal C-modules for micropython with basic crypto algorithms. Interface to optimized C modules allow to use optimized elliptic curve arithmetics and hashing functions:
+- `usermods/mpy-bitcoin/hashlib.c` adds support of sha1, sha256, sha512 and ripemd160 required for Bitcoin to `hashlib` python module.
+
+- `usermods/mpy-display/` folder contains a C-module to work with the display present on the board.
+
+- `usermods/mpy-secp256k1/` folder defines bindings to the secp256k1 library
 
 `libs` folder contains python modules that makes it more convenient to work with optimized C libraries described above:
 - `libs/bitcoin` defines classes useful for Bitcoin. `PrivateKey` and `PublicKey` classes support scalar and point arithmetics - they implement `__mul__`, `__add__` and other operator overrides that are possible for corresponding classes.
-- `libs/hmac.py` and `libs/pbkdf2.py` do what their names say they do ;)
+- `libs/hmac.py` and `libs/pbkdf2.py` do what their names say they do, but slow. `hashlib` versions are way faster.
 
 ## Compiling
 
