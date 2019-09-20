@@ -7,3 +7,6 @@
 [submodule "usermods/mpy-display-f769"]
 	path = usermods/mpy-display-f769
 	url = https://github.com/stepansnigirev/mpy-display-f769.git
+[submodule "usermods/mpy-secp256k1"]
+	path = usermods/mpy-secp256k1
+	url = https://github.com/stepansnigirev/mpy-secp256k1.git
