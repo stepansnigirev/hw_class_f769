@@ -1,6 +1,7 @@
 [submodule "micropython"]
 	path = micropython
 	url = https://github.com/stepansnigirev/micropython
+	branch = jimmy
 [submodule "usermods/mpy-bitcoin"]
 	path = usermods/mpy-bitcoin
 	url = https://github.com/stepansnigirev/mpy-bitcoin.git
